@@ -1,0 +1,29 @@
+{
+  "description": "Message queue implementation",
+  "license": "Apache-2.0",
+  "keywords": [
+    "test task"
+  ],
+  "minimum-stability": "beta",
+  "require": {
+    "php": "^7.0.9"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0 | ^5.7"
+  },
+  "scripts": {
+    "tests": [
+      "vendor/bin/phpunit test --coverage-clover test/clover.xml --configuration test/phpunit.xml --coverage-html test/html-report"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "TestTaskAMItems\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TestTaskAMItems\\Test\\": "test/"
+    }
+  }
+}

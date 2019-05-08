@@ -25,9 +25,6 @@
     $type_l = new ItemType('l');
     $type_m = new ItemType('m');
 
-    // Делаем тестовые сеты
-    $data = [];
-
     $subRule1 = new TotalCostSelectedItemsRule(0.1, [$type_a, $type_b]);
     $subRule2 = new TotalCostSelectedItemsRule(0.06, [$type_d, $type_e]);
     $subRule3 = new TotalCostSelectedItemsRule(0.03, [$type_e, $type_f, $type_g]);
@@ -44,6 +41,7 @@
 
     $standardRuleSet = new RuleSet([$rule1, $rule2, $rule3, $rule4, $rule5_7]);
 
+    // Берём данные из argc
     $options = getopt('i:');
     $items = [];
     foreach (preg_split('_[,;\\s]_', $options['i']) as $sub_option) {

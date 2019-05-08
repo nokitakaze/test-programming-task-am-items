@@ -3,18 +3,18 @@
 
     namespace TestTaskAMItems\Rules;
 
-    use TestTaskAMItems\Basket;
     use TestTaskAMItems\Item;
+    use TestTaskAMItems\ItemType;
 
     abstract class Rule
     {
         /**
-         * @var string[]|null
+         * @var ItemType[]|null
          */
         protected $_excludes = null;
 
         /**
-         * @var string[]|string[][]|null
+         * @var ItemType[]|ItemType[][]|null
          */
         protected $_only_includes = null;
 
@@ -33,14 +33,14 @@
         {
             if (!is_null($this->_only_includes)) {
                 foreach ($this->_only_includes as $include_rule) {
-                    if (is_string($include_rule)) {
-                        if ($item->getType() == $include_rule) {
-                            return true;
+                    if (is_array($include_rule)) {
+                        foreach ($include_rule as $sub_rule) {
+                            if ($sub_rule->isPassItem($item)) {
+                                return true;
+                            }
                         }
-                    } elseif (is_array($include_rule)) {
-                        if (in_array($item->getType(), $include_rule)) {
-                            return true;
-                        }
+                    } elseif ($include_rule->isPassItem($item)) {
+                        return true;
                     }
                 }
 
@@ -51,6 +51,12 @@
                 return true;
             }
 
-            return !in_array($item->getType(), $this->_excludes);
+            foreach ($this->_excludes as $type) {
+                if ($type->isPassItem($item)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }

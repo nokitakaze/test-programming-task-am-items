@@ -29,6 +29,9 @@
                     }
 
                     $response->addRuleResponse($ruleResponse);
+                    // hint: Мы исключаем ВСЕ товары, которые тикнули ХОТЯ БЫ В ОДНОЙ из предыдуших
+                    // Задание не описывает правильный behaviour для части правил, поэтому поведение именно такое
+                    $items_left = $ruleResponse->getItemsNotPassed();
 
                     break;
                 }

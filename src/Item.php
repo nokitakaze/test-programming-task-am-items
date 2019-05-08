@@ -11,11 +11,11 @@
     interface Item
     {
         /**
-         * Тип товара. Одна буква в upper case
+         * Тип товара
          *
-         * @return string
+         * @return ItemType
          */
-        function getType(): string;
+        function getType(): ItemType;
 
         /**
          * Цена товара

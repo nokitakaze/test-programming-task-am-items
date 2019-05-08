@@ -8,30 +8,36 @@
         /**
          * @var string
          */
-        public $type;
+        protected $_type;
 
         /**
          * @var float
          */
-        public $price;
+        protected $_price;
 
-        /**
-         * Это не геттер поля, это имплементация сигнатуры code contract
-         *
-         * @return string
-         */
-        public function getType(): string
+        public function __construct(ItemType $type, float $price)
         {
-            return mb_strtoupper(mb_substr($this->type, 0, 1));
+            $this->_type = $type;
+            $this->_price = $price;
         }
 
         /**
-         * Это не геттер поля, это имплементация сигнатуры code contract
+         * Тип товара
+         *
+         * @return \TestTaskAMItems\ItemType
+         */
+        public function getType(): ItemType
+        {
+            return $this->_type;
+        }
+
+        /**
+         * Цена товара
          *
          * @return float
          */
         public function getPrice(): float
         {
-            return $this->price;
+            return $this->_price;
         }
     }

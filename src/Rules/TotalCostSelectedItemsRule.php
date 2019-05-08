@@ -4,6 +4,7 @@
     namespace TestTaskAMItems\Rules;
 
     use TestTaskAMItems\Item;
+    use \TestTaskAMItems\ItemType;
 
     /**
      * Class TotalCostSelectedItemsRule
@@ -20,7 +21,7 @@
          */
         protected $_item_for_discount_count;
 
-        public function __construct(float $discount, array $only_includes, int $item_for_discount_count = INF)
+        public function __construct(float $discount, array $only_includes, int $item_for_discount_count = PHP_INT_MAX)
         {
             $this->_discount = $discount;
             $this->_only_includes = $only_includes;
@@ -32,6 +33,38 @@
          * @return \TestTaskAMItems\Rules\RuleCalculationResponse|null
          */
         public function calculate(array $items)
+        {
+            $items_left = $items;
+            $items_passed = [];
+            $discount = 0;
+            while (!empty($items_left)) {
+                $sub_response = $this->calculateIteration($items_left);
+                if (is_null($sub_response)) {
+                    break;
+                }
+                $items_passed = array_merge($items_passed, $sub_response->getItemsPassed());
+                $items_left = $sub_response->getItemsNotPassed();
+                $discount += $sub_response->getDiscountValue();
+            }
+
+            if (empty($items_passed)) {
+                return null;
+            }
+
+            $response = new RuleCalculationResponse(
+                $items_passed,
+                $items_left,
+                $discount
+            );
+
+            return $response;
+        }
+
+        /**
+         * @param \TestTaskAMItems\Item[] $items
+         * @return \TestTaskAMItems\Rules\RuleCalculationResponse|null
+         */
+        public function calculateIteration(array $items)
         {
             /**
              * @var Item[] $items_by_groups
@@ -45,14 +78,22 @@
             foreach ($this->_only_includes as $item_group) {
                 /**
                  * @var Item[] $this_group_items
-                 * @var string[] $item_group_standard
+                 * @var ItemType[] $item_group_standard
                  */
                 $this_group_items = [];
                 $item_group_standard = is_array($item_group) ? $item_group : [$item_group];
 
                 // Можно сделать через array_filter
                 foreach ($items_left as $item) {
-                    if (in_array($item->getType(), $item_group_standard)) {
+                    $u = false;
+                    foreach ($item_group_standard as $type) {
+                        if ($type->isPassItem($item)) {
+                            $u = true;
+                            break;
+                        }
+                    }
+
+                    if ($u) {
                         $this_group_items[] = $item;
                     }
                 }

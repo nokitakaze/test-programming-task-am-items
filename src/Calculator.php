@@ -11,7 +11,7 @@
          * В случае объекта с одной чистой функцией, который никогда не будет изменяться и не обращается к своим полям,
          * я бы оформил метод как статичным. Вариант с нестатичным методом ТОЛЬКО расширения класса
          *
-         * @param \TestTaskAMItems\Basket $basket
+         * @param \TestTaskAMItems\Basket        $basket
          * @param \TestTaskAMItems\Rules\RuleSet $ruleSet
          * @return \TestTaskAMItems\CalculatorResponse
          */

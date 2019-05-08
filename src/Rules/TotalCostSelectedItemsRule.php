@@ -77,7 +77,7 @@
             }
             foreach ($this->_only_includes as $item_group) {
                 /**
-                 * @var Item[] $this_group_items
+                 * @var Item[]     $this_group_items
                  * @var ItemType[] $item_group_standard
                  */
                 $this_group_items = [];

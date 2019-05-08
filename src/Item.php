@@ -15,12 +15,12 @@
          *
          * @return ItemType
          */
-        function getType(): ItemType;
+        public function getType(): ItemType;
 
         /**
          * Цена товара
          *
          * @return float
          */
-        function getPrice(): float;
+        public function getPrice(): float;
     }

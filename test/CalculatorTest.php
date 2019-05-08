@@ -295,9 +295,9 @@
         }
 
         /**
-         * @param \TestTaskAMItems\Basket $basket
+         * @param \TestTaskAMItems\Basket        $basket
          * @param \TestTaskAMItems\Rules\RuleSet $ruleSet
-         * @param float $expected_discount
+         * @param float                          $expected_discount
          *
          * @dataProvider dataTestCalculator
          * @throws \Exception

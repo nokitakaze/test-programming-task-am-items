@@ -29,7 +29,7 @@
         /**
          * @return Rule[]
          */
-        public function getGroup(): array
+        public function getGroups(): array
         {
             return $this->_group;
         }

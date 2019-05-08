@@ -321,5 +321,29 @@
 
             $this->assertEquals($sum, $response->getOriginalPrice());
             $this->assertEquals($expected_discount, $response->getFullDiscountValue());
+            $this->assertEquals($sum - $expected_discount, $response->getDiscountedPrice());
+        }
+
+        public function testPrimitives()
+        {
+            // ItemType
+            $type_a = new ItemType('a');
+            $type_a1 = new ItemType('a');
+            $type_b = new ItemType('b');
+            $this->assertEquals('A', $type_a->getType());
+            $this->assertEquals('B', $type_b->getType());
+
+            $this->assertTrue($type_a->isEqual($type_a1));
+            $this->assertFalse($type_a->isEqual($type_b));
+
+            // ItemObject
+            $a100 = new ItemObject($type_a, 100);
+            $b50 = new ItemObject($type_b, 50);
+            $this->assertEquals(100, $a100->getPrice());
+            $this->assertEquals(50, $b50->getPrice());
+
+            // Basket
+            $basket = new Basket([$a100, $b50]);
+            $this->assertEquals(2, count($basket->items));
         }
     }

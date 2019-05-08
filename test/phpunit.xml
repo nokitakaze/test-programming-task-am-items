@@ -5,7 +5,17 @@
          timeoutForLargeTests="60">
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <file>../src/AbstractQueueTransport.php</file>
+            <file>../src/Basket.php</file>
+            <file>../src/Calculator.php</file>
+            <file>../src/CalculatorResponse.php</file>
+            <file>../src/ItemObject.php</file>
+            <file>../src/ItemType.php</file>
+            <file>../src/Rules/BasketDiscountRule.php</file>
+            <file>../src/Rules/Rule.php</file>
+            <file>../src/Rules/RuleCalculationResponse.php</file>
+            <file>../src/Rules/RuleGroup.php</file>
+            <file>../src/Rules/RuleSet.php</file>
+            <file>../src/Rules/TotalCostSelectedItemsRule.php</file>
         </whitelist>
         <blacklist>
             <directory suffix=".php">../vendor</directory>

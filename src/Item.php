@@ -1,26 +1,26 @@
 <?php
-declare(strict_types=1);
+    declare(strict_types=1);
 
-namespace TestTaskAMItems;
-
-/**
- * Интерфейс товара
- *
- * @package TestTaskAMItems
- */
-interface Item
-{
-    /**
-     * Тип товара. Одна буква в upper case
-     *
-     * @return string
-     */
-    function getType(): string;
+    namespace TestTaskAMItems;
 
     /**
-     * Цена товара
+     * Интерфейс товара
      *
-     * @return float
+     * @package TestTaskAMItems
      */
-    function getPrice(): float;
-}
+    interface Item
+    {
+        /**
+         * Тип товара. Одна буква в upper case
+         *
+         * @return string
+         */
+        function getType(): string;
+
+        /**
+         * Цена товара
+         *
+         * @return float
+         */
+        function getPrice(): float;
+    }

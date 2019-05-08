@@ -1,18 +1,18 @@
 <?php
-declare(strict_types=1);
+    declare(strict_types=1);
 
-namespace TestTaskAMItems;
+    namespace TestTaskAMItems;
 
-/**
- * Class Basket
- * @package TestTaskAMItems
- *
- * Само собой реальная корзина в магазине будет выглядеть совсем по-другому
- */
-class Basket
-{
     /**
-     * @var Item[]
+     * Class Basket
+     * @package TestTaskAMItems
+     *
+     * Само собой реальная корзина в магазине будет выглядеть совсем по-другому
      */
-    public $items;
-}
+    class Basket
+    {
+        /**
+         * @var Item[]
+         */
+        public $items;
+    }

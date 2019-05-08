@@ -1,41 +1,41 @@
 <?php
-declare(strict_types=1);
+    declare(strict_types=1);
 
-namespace TestTaskAMItems\Rules;
+    namespace TestTaskAMItems\Rules;
 
-/**
- * Class RuleSet
- * Весь сет правил для калькулятора
- * @package TestTaskAMItems\Rules
- */
-class RuleSet
-{
     /**
-     * @var RuleGroup[]
+     * Class RuleSet
+     * Весь сет правил для калькулятора
+     * @package TestTaskAMItems\Rules
      */
-    protected $_group;
-
-    function __construct(array $group)
+    class RuleSet
     {
-        $array = [];
-        foreach ($group as $rule) {
-            if ($rule instanceof RuleGroup) {
-                $array[] = $rule;
-            } elseif ($rule instanceof Rule) {
-                $array[] = new RuleGroup([$rule]);
-            } else {
-                throw new \Exception();
+        /**
+         * @var RuleGroup[]
+         */
+        protected $_group;
+
+        public function __construct(array $group)
+        {
+            $array = [];
+            foreach ($group as $rule) {
+                if ($rule instanceof RuleGroup) {
+                    $array[] = $rule;
+                } elseif ($rule instanceof Rule) {
+                    $array[] = new RuleGroup([$rule]);
+                } else {
+                    throw new AMItemsException();
+                }
             }
+
+            $this->_group = $array;
         }
 
-        $this->_group = $array;
+        /**
+         * @return RuleGroup[]
+         */
+        public function getGroup(): array
+        {
+            return $this->_group;
+        }
     }
-
-    /**
-     * @return RuleGroup[]
-     */
-    function getGroup(): array
-    {
-        return $this->_group;
-    }
-}

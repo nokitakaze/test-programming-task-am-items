@@ -1,36 +1,36 @@
 <?php
-declare(strict_types=1);
+    declare(strict_types=1);
 
-namespace TestTaskAMItems\Rules;
+    namespace TestTaskAMItems\Rules;
 
-/**
- * Class RuleGroup
- * Группа взаимоисключающих правил
- * @package TestTaskAMItems\Rules
- */
-class RuleGroup
-{
     /**
-     * @var Rule[]
+     * Class RuleGroup
+     * Группа взаимоисключающих правил
+     * @package TestTaskAMItems\Rules
      */
-    protected $_group;
-
-    function __construct(array $group)
+    class RuleGroup
     {
-        foreach ($group as $rule) {
-            if (!($rule instanceof Rule)) {
-                throw new \Exception();
+        /**
+         * @var Rule[]
+         */
+        protected $_group;
+
+        public function __construct(array $group)
+        {
+            foreach ($group as $rule) {
+                if (!($rule instanceof Rule)) {
+                    throw new AMItemsException();
+                }
             }
+
+            $this->_group = $group;
         }
 
-        $this->_group = $group;
+        /**
+         * @return Rule[]
+         */
+        public function getGroup(): array
+        {
+            return $this->_group;
+        }
     }
-
-    /**
-     * @return Rule[]
-     */
-    function getGroup(): array
-    {
-        return $this->_group;
-    }
-}
